@@ -7,7 +7,9 @@ let workItems = [];
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
-mongoose.connect("mongodb://127.0.0.1:27017/todoDB");
+mongoose.connect(
+  "mongodb+srv://admin-Nick:test123@cluster0.mmgfoqa.mongodb.net/todoDB"
+);
 const listSchema = {
   name: String,
 };
@@ -140,6 +142,10 @@ app.post("/delete", function (req, res) {
   }
 });
 
-app.listen(3000, function () {
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 3000;
+}
+app.listen(port, function () {
   console.log("Server started at port 3000");
 });
